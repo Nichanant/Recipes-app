@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import verselLogo from '../../../../public/vercel.svg'
 
 
 function recipeInfo() {
@@ -42,12 +43,16 @@ function recipeInfo() {
                     (
                         <div className='bg-white w-[500px] overflow-hidden rounded-xl shadow-lg grid grid-cols-1 justify-center items-center lg:grid-cols-2 lg:w-[1200px]'>
                             {/* *****Not to use <Image/> right here cause prevent Error***** */}
-                            <img src={recipes.image}
+                            <Image src={recipes.image || verselLogo}
                                 width={500}
-                                height={800}
-                                alt={recipes.name}
+                                height={0}
+                                alt={recipes.name || "verselLogo"}
                                 className='rounded-xl h-full' 
-                                style={{objectFit:"cover"}}/>
+                                style={{objectFit:"cover", width:"auto", height:"500"}}
+                                preload="false"
+                                priority={true}
+                                srcSet={verselLogo}
+                                quality={70}/>
 
                             <div className='info'>
                                 <div className='text-4xl text-yellow-900 my-5 mx-10'>{recipes.name}</div>

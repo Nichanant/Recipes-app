@@ -4,6 +4,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
+import vercelLogo from '../../../public/vercel.svg'
 
 function AllRecipesData() {
     const [recipes, setRecipes] = useState([]);
@@ -40,12 +41,17 @@ function AllRecipesData() {
                             <Link key={val.id} href={`/recipeInfo/[id]`} as={`/recipeInfo/${index + 1}`}>
                                 <div key={index} className='flex flex-col justify-between items-center shadow-md transtion cursor-pointer rounded-md bg-white m-2 w-auto hover:border-2 border-yellow-500'>
                                     {/* *****Not to use <Image/> right here cause prevent Error***** */}
-                                        <img src={`https://cdn.dummyjson.com/recipe-images/${index + 1}.webp`}
-                                            width={200}
-                                            height={200}
-                                            alt={val.name}
-                                            className='rounded-md w-fit' />
-                                    
+                                    <Image src={`https://cdn.dummyjson.com/recipe-images/${index + 1}.webp`}
+                                        width={200}
+                                        height={0}
+                                        alt={val.name}
+                                        className='rounded-md w-fit'
+                                        preload="false"
+                                        style={{width:"auto", height:"200"}}
+                                        priority={true}
+                                        srcSet={vercelLogo}
+                                        quality={70} />
+
                                     <div className='text-lg p-4'>{val.name}</div>
                                 </div>
                             </Link>
